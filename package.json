@@ -19,12 +19,20 @@
     "@cap-js/sqlite": "^2",
     "@types/node": "^22.0.0",
     "tsx": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "cds-plugin-ui5": "^0.9.3"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-books": "cds watch --open ns.books/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
-  }
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/books"
+  ]
 }
