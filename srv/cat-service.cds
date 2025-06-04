@@ -6,6 +6,7 @@ service CatalogService {
     @cds.persistence.skip
     @odata.singleton
     entity ExcelUpload {
+        @Core.MediaType : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         excel: LargeBinary;
     }
 }

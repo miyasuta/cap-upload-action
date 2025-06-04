@@ -36,6 +36,7 @@ export class CatalogService extends cds.ApplicationService {
               })
             }
             if (data) {
+              console.log('Data to be saved:', data)
               const responseCall = await saveBooks(data)
               if (responseCall == -1) {
                 req.error(400, 'Error while saving data')

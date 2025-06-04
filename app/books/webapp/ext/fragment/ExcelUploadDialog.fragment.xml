@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m" 
+    xmlns:macros="sap.fe.macros" >
+
+    <Dialog 
+        id="uploadDialog" 
+        title="Upload Excel File" 
+        contentWidth="500px" 
+        contentHeight="300px"
+        beforeOpen=".onBeforeOpen"
+        afterClose=".onAfterClose"> 
+
+    <content> 
+        <macros:Field id="excelFile" metaPath="/ExcelUpload/excel" /> 
+    </content> 
+
+    <beginButton> 
+      <Button id="closeButton" text="Close" press=".closeDialog" /> 
+    </beginButton> 
+
+  </Dialog> 
+    
+</core:FragmentDefinition>
