@@ -1,4 +1,4 @@
-import cds, { entity } from '@sap/cds'
+import cds from '@sap/cds'
 import { Books, ExcelUpload } from '#cds-models/CatalogService'
 import { PassThrough } from 'stream'
 import * as XLSX from 'xlsx'
@@ -12,14 +12,14 @@ export class CatalogService extends cds.ApplicationService {
       } 
       else {
         // var entity = req.headers.slug;
-        const streadm = new PassThrough()
+        const stream = new PassThrough()
         let buffers: Buffer[] = []
-        req.data.excel.pipe(streadm)
+        req.data.excel.pipe(stream)
         await new Promise((resolve, reject) => {
-          streadm.on('data', (chunk) => {
+          stream.on('data', (chunk) => {
             buffers.push(chunk)
           })
-          streadm.on('end', async () => {
+          stream.on('end', async () => {
             const buffer = Buffer.concat(buffers)
             const workbook = XLSX.read(buffer, { type: 'buffer' })
             let data: object[] = []
@@ -42,20 +42,19 @@ export class CatalogService extends cds.ApplicationService {
               } else {
                 resolve(req.notify(200, 'Upload Successful'))
               }
-            }
-            
+            }            
           })
         })
 
       } 
     })
 
-    async function saveBooks(data: object[]): Promise<any> {
-      const insertQuery = INSERT.into(Books).entries(data)
-      const insertResult = await cds.run(insertQuery)
-      return insertResult
-    }
-
     return super.init()
   }
+}
+
+async function saveBooks(data: object[]): Promise<any> {
+  const insertQuery = INSERT.into(Books).entries(data)
+  const insertResult = await cds.run(insertQuery)
+  return insertResult
 }
