@@ -122,6 +122,13 @@
                       "enabled": true,
                       "requiresSelection": false,
                       "text": "Upload"
+                    },
+                    "FileUploader": {
+                      "press": "ns.books.ext.controller.FileUploaderController.uploadWithFileUploader",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "File Uploader"
                     }
                   }
                 }

@@ -1,7 +1,8 @@
 using my.bookshop as my from '../db/schema';
 
 service CatalogService {
-    @readonly entity Books as projection on my.Books;
+    @odata.draft.enabled
+    entity Books as projection on my.Books;
 
     @cds.persistence.skip
     @odata.singleton
@@ -10,3 +11,9 @@ service CatalogService {
         excel: LargeBinary;
     }
 }
+
+annotate CatalogService.Books with @(
+    Capabilities.InsertRestrictions : {
+        Insertable : false,
+    }
+);

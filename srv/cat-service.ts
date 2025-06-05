@@ -9,7 +9,7 @@ export class CatalogService extends cds.ApplicationService {
     this.on('PUT', ExcelUpload, async (req, next) => {
       if (!req.data.excel) {
         return next()
-      } 
+      }
       else {
         // var entity = req.headers.slug;
         const stream = new PassThrough()
@@ -27,13 +27,7 @@ export class CatalogService extends cds.ApplicationService {
             for (let i = 0; i < sheets.length; i++) {
               const temp = XLSX.utils.sheet_to_json(
                 workbook.Sheets[sheets[i]], { rawNumbers: false, dateNF: 'yyyy-mm-dd' })
-
-              temp.forEach((res, index) => {
-                if (index === 0) {
-                  return
-                }
-                data.push(JSON.parse(JSON.stringify(res)))
-              })
+              data = data.concat(temp)
             }
             if (data) {
               console.log('Data to be saved:', data)
@@ -43,11 +37,11 @@ export class CatalogService extends cds.ApplicationService {
               } else {
                 resolve(req.notify(200, 'Upload Successful'))
               }
-            }            
+            }
           })
         })
 
-      } 
+      }
     })
 
     return super.init()
@@ -55,6 +49,7 @@ export class CatalogService extends cds.ApplicationService {
 }
 
 async function saveBooks(data: object[]): Promise<any> {
+
   const insertQuery = INSERT.into(Books).entries(data)
   const insertResult = await cds.run(insertQuery)
   return insertResult
