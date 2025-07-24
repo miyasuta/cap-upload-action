@@ -12,6 +12,7 @@
 
     <content> 
         <macros:Field id="excelFile" metaPath="/ExcelUpload/excel" /> 
+        <macros:Field id="dummy" metaPath="/ExcelUpload/dummy" /> 
     </content> 
 
     <beginButton> 

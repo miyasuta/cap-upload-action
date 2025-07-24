@@ -1,6 +1,7 @@
 import ExtensionAPI from 'sap/fe/core/ExtensionAPI';
 import Context from 'sap/ui/model/odata/v4/Context';
 import Dialog, { Dialog$AfterCloseEvent, Dialog$BeforeOpenEvent } from 'sap/m/Dialog';
+import ODataModel from 'sap/ui/model/odata/v4/ODataModel';
 
 /**
  * Generated event handler.
@@ -13,7 +14,9 @@ export function upload(this: ExtensionAPI, pageContext: Context) {
         id: "exelUploadDialog",
         name: "ns.books.ext.fragment.ExcelUploadDialog",
         controller: dialogController(this)
-    }).then((dialog) => {
+    }).then(dialog => {
+        const model = this.getModel() as ODataModel;
+        (dialog as Dialog).setModel(model);
         (dialog as Dialog).open();
     })
 }

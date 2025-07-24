@@ -5,8 +5,10 @@ service CatalogService {
 
     @cds.persistence.skip
     @odata.singleton
+    @odata.draft.enabled
     entity ExcelUpload {
         @Core.MediaType : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        excel: LargeBinary;
+        excel: LargeBinary; 
+        dummy: String; 
     }
 }
